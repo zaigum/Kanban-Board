@@ -2,6 +2,8 @@ import PlusIcon from "../icons/PlusIcon";
 import { useMemo, useState } from "react";
 import { Column, Id, Task } from "../types";
 import ColumnContainer from "./ColumnContainer";
+import { useEffect } from "react";
+
 import {
   DndContext,
   DragEndEvent,
@@ -123,6 +125,36 @@ function KanbanBoard() {
       },
     })
   );
+
+
+
+
+  
+   useEffect(() => {
+    const storedColumns = localStorage.getItem("kanbanColumns");
+    const storedTasks = localStorage.getItem("kanbanTasks");
+
+    if (storedColumns) {
+      setColumns(JSON.parse(storedColumns));
+    }
+
+    if (storedTasks) {
+      setTasks(JSON.parse(storedTasks));
+    }
+  }, []);
+
+   useEffect(() => {
+    localStorage.setItem("kanbanColumns", JSON.stringify(columns));
+  }, [columns]);
+
+  useEffect(() => {
+    localStorage.setItem("kanbanTasks", JSON.stringify(tasks));
+  }, [tasks]);
+
+
+
+
+
 
   return (
     <div className="m-auto flex min-h-screen w-full items-center overflow-x-auto overflow-y-hidden px-[40px]">
