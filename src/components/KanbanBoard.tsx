@@ -98,6 +98,12 @@ const defaultTasks: Task[] = [
     columnId: "doing",
     content: "Design and implement responsive UI",
   },
+  // New task added
+  {
+    id: "14",
+    columnId: "done",
+    content: "Write user documentation",
+  },
 ];
 
 function KanbanBoard() {
@@ -199,15 +205,17 @@ function KanbanBoard() {
   );
 
   function createTask(columnId: Id) {
-    const newTask: Task = {
-      id: generateId(),
-      columnId,
-      content: `Task ${tasks.length + 1}`,
-    };
-
-    setTasks([...tasks, newTask]);
+     setTasks((prevTasks) => [
+      ...prevTasks,
+      {
+        id: generateId(),
+        columnId,
+        content: `Task ${prevTasks.length + 1}`,
+      },
+    ]);
   }
-
+  
+  
   function deleteTask(id: Id) {
     const newTasks = tasks.filter((task) => task.id !== id);
     setTasks(newTasks);
@@ -261,30 +269,28 @@ function KanbanBoard() {
   }
 
   function onDragEnd(event: DragEndEvent) {
-    setActiveColumn(null);
+     setActiveColumn(null);
     setActiveTask(null);
-
-    const { active, over } = event;
-    if (!over) return;
-
+     const { active, over } = event;
+     if (!over) return;
     const activeId = active.id;
     const overId = over.id;
 
-    if (activeId === overId) return;
-
-    const isActiveAColumn = active.data.current?.type === "Column";
+     if (activeId === overId) return;
+  
+     const isActiveAColumn = active.data.current?.type === "Column";
     if (!isActiveAColumn) return;
-
-    console.log("DRAG END");
-
-    setColumns((columns) => {
+  
+     console.log("DRAG END");
+  
+     setColumns((columns) => {
       const activeColumnIndex = columns.findIndex((col) => col.id === activeId);
-
       const overColumnIndex = columns.findIndex((col) => col.id === overId);
-
-      return arrayMove(columns, activeColumnIndex, overColumnIndex);
+  
+       return arrayMove(columns, activeColumnIndex, overColumnIndex);
     });
   }
+  
 
   function onDragOver(event: DragOverEvent) {
     const { active, over } = event;

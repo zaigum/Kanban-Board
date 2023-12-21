@@ -59,7 +59,7 @@ function ColumnContainer({
         ref={setNodeRef}
         style={style}
         className="
-        bg-[#0f172a]  // Change the background color here
+        bg-[#0f172a]  
         opacity-40
       border-2
       border-pink-500
@@ -79,7 +79,7 @@ function ColumnContainer({
       ref={setNodeRef}
       style={style}
       className="
-      bg-[#0f172a]  // Change the background color here
+      bg-[#0f172a]   
       w-[350px]
   h-[500px]
   max-h-[500px]
