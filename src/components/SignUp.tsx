@@ -1,6 +1,5 @@
 // SignUp.tsx
 import React, { useState } from "react";
-import axios from "axios";
 
 const SignUp: React.FC<{ onToggleLogin: () => void }> = ({ onToggleLogin }) => {
   const [userData, setUserData] = useState({
@@ -18,18 +17,34 @@ const SignUp: React.FC<{ onToggleLogin: () => void }> = ({ onToggleLogin }) => {
 
   const handleSignUp = async () => {
     try {
-      const response = await axios.post("/api/auth/createUser", userData, {
-        headers: { "Content-Type": "application/json" },
-      });
-  
-       console.log("User created successfully:", response.data);
-    } catch (error: any) {
-        console.error("Error creating user:", error.message);
+      const response = await fetch(
+        "https://repulsive-mite-hosiery.cyclic.app/api/auth/createUser",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userData),
+        }
+      );
+
+      console.log("Response:", response);  
+
+      if (response.ok) {
+        console.log("User signed up successfully");
+      } else {
+        console.error("Failed to sign up. Status:", response.status);
+      }
+    } catch (error) {
+      console.error("Error during sign up:", error);
     }
   };
+
+
+
+
+
   
-
-
   return (
     <div className="min-h-screen bg-slate-900	 flex items-center justify-center">
       <div className="bg-white p-8 rounded shadow-md max-w-md w-full">

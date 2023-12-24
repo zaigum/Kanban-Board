@@ -38,27 +38,27 @@ const defaultCols: Column[] = [
 ];
 
 const defaultTasks: Task[] = [
-    {
-       id: "1",
-    columnId: "TL REVIEW",
-     content: "List admin APIs for dashboard",
-   },
-   {
-     id: "2",
-     columnId: "todo",
-     content:
-      "Develop user registration functionality with OTP delivered on SMS  ",
-   },
-   {
-     id: "3",
-     columnId: "doing",
-     content: "Conduct security testing",
-   },
-   {
-     id: "4",
-     columnId: "doing",
-     content: "Analyze competitors",
-   },
+  //   {
+  //      id: "1",
+  //   columnId: "TL REVIEW",
+  //    content: "List admin APIs for dashboard",
+  //  },
+  //  {
+  //    id: "2",
+  //    columnId: "todo",
+  //    content:
+  //     "Develop user registration functionality with OTP delivered on SMS  ",
+  //  },
+  //  {
+  //    id: "3",
+  //    columnId: "doing",
+  //    content: "Conduct security testing",
+  //  },
+  //  {
+  //    id: "4",
+  //    columnId: "doing",
+  //    content: "Analyze competitors",
+  //  },
     // {
     //   id: "5",
     //   columnId: "done",
@@ -99,17 +99,17 @@ const defaultTasks: Task[] = [
   //   columnId: "doing",
   //   content: "Implement error logging and monitoring",
   // },
-   {
-      id: "13",
-      columnId: "doing",
-     content: "Design and implement responsive UI",
-   },
-    // New task added
-   {
-     id: "14",
-    columnId: "done",
-     content: "Write user documentation",
-   },
+  //  {
+  //     id: "13",
+  //     columnId: "doing",
+  //    content: "Design and implement responsive UI",
+  //  },
+  //   // New task added
+  //  {
+  //    id: "14",
+  //   columnId: "done",
+  //    content: "Write user documentation",
+  //  },
 ];
 
 function KanbanBoard() {
@@ -286,29 +286,51 @@ function KanbanBoard() {
 
 
 
-
   function deleteTask(id: Id) {
-    const newTasks = tasks.filter((task) => task.id !== id);
-    setTasks(newTasks);
+    setTasks((prevTasks) => {
+      const newTasks = prevTasks.filter((task) => task.id !== id);
+      localStorage.setItem("kanbanTasks", JSON.stringify(newTasks));
+      return newTasks;
+    });
   }
+
 
   function updateTask(id: Id, content: string) {
-    const newTasks = tasks.map((task) => {
-      if (task.id !== id) return task;
-      return { ...task, content };
+    setTasks((prevTasks) => {
+      const newTasks = prevTasks.map((task) => {
+        if (task.id !== id) return task;
+        return { ...task, content };
+      });
+  
+      localStorage.setItem("kanbanTasks", JSON.stringify(newTasks));
+      return newTasks;
     });
-
-    setTasks(newTasks);
   }
- 
+  
+
+
 
   function deleteColumn(id: Id) {
-    const filteredColumns = columns.filter((col) => col.id !== id);
-    setColumns(filteredColumns);
-
-    const newTasks = tasks.filter((t) => t.columnId !== id);
-    setTasks(newTasks);
+    setColumns((prevColumns) => {
+      const filteredColumns = prevColumns.filter((col) => col.id !== id);
+      setTasks((prevTasks) => {
+        const newTasks = prevTasks.filter((task) => task.columnId !== id);
+        localStorage.setItem("kanbanTasks", JSON.stringify(newTasks));
+        return newTasks;
+      });
+      localStorage.setItem("kanbanColumns", JSON.stringify(filteredColumns));
+      return filteredColumns;
+    });
   }
+
+
+
+
+
+
+
+
+  
 
   function updateColumn(id: Id, title: string) {
     setColumns((prevColumns) => {
@@ -323,6 +345,11 @@ function KanbanBoard() {
   }
   
 
+
+
+
+
+
   function onDragStart(event: DragStartEvent) {
     if (event.active.data.current?.type === "Column") {
       setActiveColumn(event.active.data.current.column);
@@ -334,6 +361,12 @@ function KanbanBoard() {
       return;
     }
   }
+
+
+
+
+
+
 
   function onDragEnd(event: DragEndEvent) {
     setActiveColumn(null);
@@ -360,7 +393,16 @@ function KanbanBoard() {
     });
   }
   
+
+
+
+
+
+
   
+
+
+
 
   function onDragOver(event: DragOverEvent) {
     const { active, over } = event;
