@@ -6,8 +6,7 @@
 html,
 body,
 #root {
-  background-color: #000000;
-  color: white;
+   color: white;
   box-sizing: border-box;
 }
 

@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import { Column, Id, Task } from "../types";
 import ColumnContainer from "./ColumnContainer";
 import { useEffect } from "react";
-
+ 
 import {
   DndContext,
   DragEndEvent,
@@ -19,47 +19,51 @@ import { createPortal } from "react-dom";
 import TaskCard from "./TaskCard";
 
 const defaultCols: Column[] = [
-  // {
-  //   id: "todo",
-  //   title: "Todo",
-  // },
-  // {
-  //   id: "doing",
-  //   title: "Work in progress",
-  // },
-  // {
-  //   id: "done",
-  //   title: "Done",
-  // },
+    {
+      id: "TL REVIEW",
+     title: "TL REVIEW",
+    },
+    {
+      id: "doing",
+     title: "PRE BACKLOG 5",
+    },
+    {
+     id: "done",
+      title: "PRODUCT BACKLOG ITEMS 25",
+   },
+    {
+     id: "IN PROGRESS",
+      title: "IN PROGRESS",
+   },
 ];
 
 const defaultTasks: Task[] = [
-  // {
-  //   id: "1",
-  //   columnId: "todo",
-  //   content: "List admin APIs for dashboard",
-  // },
-  // {
-  //   id: "2",
-  //   columnId: "todo",
-  //   content:
-  //     "Develop user registration functionality with OTP delivered on SMS after email confirmation and phone number confirmation",
-  // },
-  // {
-  //   id: "3",
-  //   columnId: "doing",
-  //   content: "Conduct security testing",
-  // },
-  // {
-  //   id: "4",
-  //   columnId: "doing",
-  //   content: "Analyze competitors",
-  // },
-  // {
-  //   id: "5",
-  //   columnId: "done",
-  //   content: "Create UI kit documentation",
-  // },
+    {
+       id: "1",
+    columnId: "TL REVIEW",
+     content: "List admin APIs for dashboard",
+   },
+   {
+     id: "2",
+     columnId: "todo",
+     content:
+      "Develop user registration functionality with OTP delivered on SMS  ",
+   },
+   {
+     id: "3",
+     columnId: "doing",
+     content: "Conduct security testing",
+   },
+   {
+     id: "4",
+     columnId: "doing",
+     content: "Analyze competitors",
+   },
+    // {
+    //   id: "5",
+    //   columnId: "done",
+    //   content: "Create UI kit documentation",
+    // },
   // {
   //   id: "6",
   //   columnId: "done",
@@ -95,17 +99,17 @@ const defaultTasks: Task[] = [
   //   columnId: "doing",
   //   content: "Implement error logging and monitoring",
   // },
-  // {
-  //   id: "13",
-  //   columnId: "doing",
-  //   content: "Design and implement responsive UI",
-  // },
-  // // New task added
-  // {
-  //   id: "14",
-  //   columnId: "done",
-  //   content: "Write user documentation",
-  // },
+   {
+      id: "13",
+      columnId: "doing",
+     content: "Design and implement responsive UI",
+   },
+    // New task added
+   {
+     id: "14",
+    columnId: "done",
+     content: "Write user documentation",
+   },
 ];
 
 function KanbanBoard() {
@@ -160,7 +164,7 @@ function KanbanBoard() {
 
 
   return (
-    <div className="m-auto flex min-h-screen w-full items-center overflow-x-auto overflow-y-hidden px-[40px]">
+    <div className="m-auto flex min-h-screen w-full  text-white bg-slate-700	 items-center overflow-x-auto overflow-y-hidden px-[40px]  ">
 
        <DndContext
         sensors={sensors}
@@ -242,36 +246,35 @@ function KanbanBoard() {
 
 
 
-
   function createTask(columnId: Id) {
-    setTasks((prevTasks) => [
-      ...prevTasks,
-      {
-        id: generateId(),
-        columnId,
-        content: `Task ${prevTasks.length + 1}`,
-      },
-    ]);
+    setTasks((prevTasks) => {
+      const newTasks = [
+        ...prevTasks,
+        {
+          id: generateId(),
+          columnId,
+          content: `Task ${prevTasks.length + 1}`, // Change from 0 to 1
+        },
+      ];
   
-     localStorage.setItem("kanbanTasks", JSON.stringify(tasks));
+      localStorage.setItem("kanbanTasks", JSON.stringify(newTasks));
+      return newTasks;
+    });
   }
   
-
-
-
-
-
-
   function createNewColumn() {
-    const columnToAdd: Column = {
-      id: generateId(),
-      title: `Column ${columns.length + 1}`,
-    };
+    setColumns((prevColumns) => {
+      const columnToAdd: Column = {
+        id: generateId(),
+        title: `Column ${prevColumns.length + 1}`, // Change from 0 to 1
+      };
   
-    setColumns((prevColumns) => [...prevColumns, columnToAdd]);
-  
-     localStorage.setItem("kanbanColumns", JSON.stringify(columns));
+      const newColumns = [...prevColumns, columnToAdd];
+      localStorage.setItem("kanbanColumns", JSON.stringify(newColumns));
+      return newColumns;
+    });
   }
+  
   
 
 
@@ -308,13 +311,17 @@ function KanbanBoard() {
   }
 
   function updateColumn(id: Id, title: string) {
-    const newColumns = columns.map((col) => {
-      if (col.id !== id) return col;
-      return { ...col, title };
+    setColumns((prevColumns) => {
+      const newColumns = prevColumns.map((col) => {
+        if (col.id !== id) return col;
+        return { ...col, title };
+      });
+  
+      localStorage.setItem("kanbanColumns", JSON.stringify(newColumns));
+      return newColumns;
     });
-
-    setColumns(newColumns);
   }
+  
 
   function onDragStart(event: DragStartEvent) {
     if (event.active.data.current?.type === "Column") {
@@ -329,27 +336,30 @@ function KanbanBoard() {
   }
 
   function onDragEnd(event: DragEndEvent) {
-     setActiveColumn(null);
+    setActiveColumn(null);
     setActiveTask(null);
-     const { active, over } = event;
-     if (!over) return;
+  
+    const { active, over } = event;
+    if (!over) return;
+  
     const activeId = active.id;
     const overId = over.id;
-
-     if (activeId === overId) return;
   
-     const isActiveAColumn = active.data.current?.type === "Column";
+    if (activeId === overId) return;
+  
+    const isActiveAColumn = active.data.current?.type === "Column";
     if (!isActiveAColumn) return;
   
-     console.log("DRAG END");
-  
-     setColumns((columns) => {
+    setColumns((columns) => {
       const activeColumnIndex = columns.findIndex((col) => col.id === activeId);
       const overColumnIndex = columns.findIndex((col) => col.id === overId);
   
-       return arrayMove(columns, activeColumnIndex, overColumnIndex);
+      const newColumns = arrayMove(columns, activeColumnIndex, overColumnIndex);
+      localStorage.setItem("kanbanColumns", JSON.stringify(newColumns));
+      return newColumns;
     });
   }
+  
   
 
   function onDragOver(event: DragOverEvent) {
@@ -379,7 +389,8 @@ function KanbanBoard() {
         return arrayMove(tasks, activeIndex, overIndex);
       });
     }
-
+    
+    
     const isOverAColumn = over.data.current?.type === "Column";
 
      if (isActiveATask && isOverAColumn) {
