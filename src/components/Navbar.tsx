@@ -1,10 +1,36 @@
 // Navbar.tsx
-import React from "react";
-import { FiBell, FiSettings, FiUser,  } from "react-icons/fi"; // Import icons from react-icons
+import React, { useState, useEffect } from "react";
+import { FiBell, FiSettings, FiUser } from "react-icons/fi";
+import CreateModal from "./CreateModal"; // Import the modal component
 
 const Navbar: React.FC = () => {
+  const [isNavbarVisible, setIsNavbarVisible] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const isScrolled = scrollPosition > 0;
+      setIsNavbarVisible(!isScrolled);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
-    <nav className="bg-slate-800 p-3 text-slate-200 flex items-center justify-between">
+    <nav className={`bg-slate-800 p-3 text-slate-200 flex items-center justify-between fixed w-full transition-all duration-300 ${isNavbarVisible ? "opacity-100" : "opacity-0 -translate-y-full"}`}>
       {/* Left side with heading and navigation links */}
       <div className="flex items-center space-x-4">
         {/* Heading */}
@@ -39,15 +65,16 @@ const Navbar: React.FC = () => {
             {/* Add more options as needed */}
           </div>
         </div>
+
+        {/* Create button */}
+        <button onClick={openModal} className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
+          Create
+        </button>
       </div>
 
       {/* Right side with icons, Create button, and Search Input */}
       <div className="flex items-center space-x-4">
-        {/* Create button */}
-        <button className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
-           Create
-        </button>
-
+        
         {/* Search Input with transition effect */}
         <div className="transition-all duration-300">
           <input
@@ -65,6 +92,9 @@ const Navbar: React.FC = () => {
         {/* Account Icon */}
         <FiUser />
       </div>
+
+      {/* Render the modal if open */}
+      {isModalOpen && <CreateModal onClose={closeModal} />}
     </nav>
   );
 };

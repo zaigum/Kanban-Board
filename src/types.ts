@@ -10,4 +10,3 @@ export type Task = {
   columnId: Id;
   content: string;
 };
- 

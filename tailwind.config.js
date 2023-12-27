@@ -1,4 +1,3 @@
-// tailwind.config.js
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -9,11 +8,10 @@ export default {
     extend: {
       colors: {
         "mainBackgroundColor": '#0D1117',
-        "columnBackgroundColor": '#161C22',
-      },
+        "columnBackgroundColor": '#161C22'
+      }
     },
   },
-  plugins: [
-    // Add any Tailwind CSS plugins here, if needed
-  ],
-};
+  plugins: [],
+}
+

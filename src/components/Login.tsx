@@ -1,4 +1,3 @@
-// Login.tsx
 import React, { useState } from 'react';
 
 interface LoginInfo {
@@ -7,10 +6,12 @@ interface LoginInfo {
   username: string;
 }
 
-const Login: React.FC<{ onLogin: () => void; onToggleSignUp: () => void }> = ({
-  onLogin,
-  onToggleSignUp,
-}) => {
+interface LoginProps {
+  onLogin: (loginInfo: LoginInfo) => void;
+  onToggleSignUp: () => void;
+}
+
+const Login: React.FC<LoginProps> = ({ onLogin, onToggleSignUp }) => {
   const [loginInfo, setLoginInfo] = useState<LoginInfo>({
     email: '',
     password: '',
@@ -18,7 +19,8 @@ const Login: React.FC<{ onLogin: () => void; onToggleSignUp: () => void }> = ({
   });
 
   const handleLogin = () => {
-      onLogin();
+    // Pass the loginInfo object to onLogin function
+    onLogin(loginInfo);
   };
   return (
     <div className="min-h-screen bg-gray-900	 flex items-center justify-center">
