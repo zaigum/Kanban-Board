@@ -35,3 +35,9 @@ body,
 .input-field {
   width: 70%; /* Set the width as needed */
 }
+.mr-60 {
+  margin-right: 18rem;
+}
+.mt-60{
+  margin-top: 20rem;
+}

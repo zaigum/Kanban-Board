@@ -3,6 +3,7 @@ import TrashIcon from "../icons/TrashIcon";
 import { Id, Task } from "../types";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { AiOutlineEllipsis } from 'react-icons/ai';
 
 interface Props {
   task: Task;
@@ -75,6 +76,7 @@ function TaskCard({ task, deleteTask, updateTask }: Props) {
     );
   }
 
+
   return (
     <div
       ref={setNodeRef}
@@ -90,6 +92,9 @@ function TaskCard({ task, deleteTask, updateTask }: Props) {
         setMouseIsOver(false);
       }}
     >
+      {/* Add three dots icon here */}
+      <AiOutlineEllipsis className="text-white cursor-pointer absolute right-4 top-1/2 -translate-y-1/2" />
+
       <p className="my-auto h-[90%] w-full overflow-y-auto overflow-x-hidden whitespace-pre-wrap">
         {task.content}
       </p>
@@ -99,7 +104,7 @@ function TaskCard({ task, deleteTask, updateTask }: Props) {
           onClick={() => {
             deleteTask(task.id);
           }}
-          className="stroke-white absolute right-4 top-1/2 -translate-y-1/2 bg-#030712 p-2 rounded opacity-60 hover:opacity-100"
+          className="stroke-white absolute right-10 top-1/2 -translate-y-1/2 bg-#030712 p-2 rounded opacity-60 hover:opacity-100"
         >
           <TrashIcon />
         </button>

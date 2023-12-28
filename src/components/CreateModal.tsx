@@ -46,8 +46,8 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
   };
   
   return (
-    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-gray-900 p-8 rounded shadow-md max-w-2xl w-full h-[80vh]">
+    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-60">
+      <div className="bg-gray-900 p-8 rounded shadow-md max-w-2xl w-full h-[90vh]">
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="flex items-center justify-between mb-4">
@@ -70,16 +70,20 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
                   </label>
                   {key === "issueType" ? (
                     <div className="relative">
-                      <input
-                        type="text"
-                        name={key}
-                        value={value as string}
-                        onChange={handleChange}
-                        className="border p-2 rounded w-full focus:outline-none focus:border-blue-500 input-field"
-                        style={{ width: '375px', color: 'white', backgroundColor: "#1e293b" }}
-                        placeholder={`Enter ${key.toLowerCase()}...`}
-                      />
-                    </div>
+                    {/* Add a select input for "ma option" */}
+                    <select
+                      name={key}
+                      value={value as string}
+                      onChange={handleChange}
+                      className="border p-2 rounded w-full focus:outline-none focus:border-blue-500 input-field"
+                      style={{ width: '375px', color: 'white', backgroundColor: "#1e293b" }}
+                    >
+                      <option value="">Select an option...</option>
+                      <option value="option1">Option 1</option>
+                      <option value="option2">Option 2</option>
+                      {/* Add more options as needed */}
+                    </select>
+                  </div>
                   ) : key === "description" ? (
                     <textarea
                       name={key}
@@ -142,7 +146,7 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
                 type="submit"
                 className="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 focus:outline-none mr-4"
               >
-                Submit
+                Create
               </button>
               <button
                 type="button"

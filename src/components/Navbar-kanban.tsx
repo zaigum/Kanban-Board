@@ -50,7 +50,7 @@ function Navbar() {
             <select
               value={selectedLabel || ""}
               onChange={handleLabelChange}
-              className="ml-1 bg-gray-900 text-white px-2 py-1 rounded-md"
+              className="ml-1 bg-gray-700 text-white px-2 py-1 rounded-md"
             >
               <option value="" disabled>
                 Label
@@ -65,7 +65,7 @@ function Navbar() {
             <select
               value={selectedType || ""}
               onChange={handleTypeChange}
-              className="ml-1 bg-gray-900 text-white px-2 py-1 rounded-md"
+              className="ml-1 bg-gray-700 text-white px-2 py-1 rounded-md"
             >
               <option value="" disabled>
                 Type
