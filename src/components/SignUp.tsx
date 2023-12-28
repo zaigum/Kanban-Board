@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
-
+ 
 const SignUp: React.FC<{ onToggleLogin: () => void }> = ({ onToggleLogin }) => {
   const [userData, setUserData] = useState({
     UserName: "",
@@ -9,37 +8,36 @@ const SignUp: React.FC<{ onToggleLogin: () => void }> = ({ onToggleLogin }) => {
     Address: "",
     Password: "",
   });
+  
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUserData((prevData) => ({ ...prevData, [name]: value }));
   };
-
+  
   const handleSignUp = async () => {
     try {
-      debugger
-      const response = await axios.post(
-        "https://repulsive-mite-hosiery.cyclic.app/api/auth/createUser",
-        userData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-           },
-        }
-      );
-      
-
-      console.log("Response:", response);
-
-      if (response.status === 200) {
+      const response = await fetch("https://repulsive-mite-hosiery.cyclic.app/api/auth/createUser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+  
+      const result = await response.json();
+  
+      if (result.isValid) {
         console.log("User signed up successfully");
       } else {
-        console.error("Failed to sign up. Status:", response.status);
+        console.error("Error during sign up:", result.message);
       }
     } catch (error) {
       console.error("Error during sign up:", error);
     }
   };
+  
+  
 
   
   return (

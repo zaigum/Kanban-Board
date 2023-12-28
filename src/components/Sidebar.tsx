@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import {
+import "../App.css";
+
+ import {
   FiCalendar,
   FiList,
   FiClipboard,
@@ -100,16 +102,20 @@ const Sidebar: React.FC = () => {
         </div>
       </aside>
       {/* Toggle Button */}
+   
 <button
   className="text-white p-2 bg-slate-800"
   onClick={toggleSidebar}
 >
   {isSidebarOpen ? (
-    <FiChevronLeft size={20} className="bg-slate-700 rounded-full" />
+    <FiChevronLeft size={20} className="bg-slate-700 rounded-full left-arrow" />
   ) : (
-    <FiChevronRight size={20} className="bg-slate-700 rounded-full" />
+    <FiChevronRight size={20} className="bg-slate-700 rounded-full right-arrow" />
   )}
 </button>
+
+
+
 
     </div>
   );
