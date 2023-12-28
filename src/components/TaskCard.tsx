@@ -3,7 +3,7 @@ import TrashIcon from "../icons/TrashIcon";
 import { Id, Task } from "../types";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { AiOutlineEllipsis } from 'react-icons/ai';
+import { BsThreeDots } from "react-icons/bs";
 
 interface Props {
   task: Task;
@@ -14,6 +14,7 @@ interface Props {
 function TaskCard({ task, deleteTask, updateTask }: Props) {
   const [mouseIsOver, setMouseIsOver] = useState(false);
   const [editMode, setEditMode] = useState(true);
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const {
     setNodeRef,
@@ -40,6 +41,11 @@ function TaskCard({ task, deleteTask, updateTask }: Props) {
     setEditMode((prev) => !prev);
     setMouseIsOver(false);
   };
+
+  const toggleDropdown = () => {
+    setShowDropdown((prev) => !prev);
+  };
+
   if (isDragging) {
     return (
       <div
@@ -76,7 +82,6 @@ function TaskCard({ task, deleteTask, updateTask }: Props) {
     );
   }
 
-
   return (
     <div
       ref={setNodeRef}
@@ -85,26 +90,92 @@ function TaskCard({ task, deleteTask, updateTask }: Props) {
       {...listeners}
       onClick={toggleEditMode}
       className="bg-gray-800 p-2.5 h-[100px] min-h-[100px] items-center flex text-white rounded-xl hover:ring-2 hover:ring-inset hover:ring-rose-600 cursor-grab relative"
-      onMouseEnter={() => {
-        setMouseIsOver(true);
-      }}
-      onMouseLeave={() => {
-        setMouseIsOver(false);
-      }}
+      onMouseEnter={() => setMouseIsOver(true)}
+      onMouseLeave={() => setMouseIsOver(false)}
     >
-      {/* Add three dots icon here */}
-      <AiOutlineEllipsis className="text-white cursor-pointer absolute right-4 top-1/2 -translate-y-1/2" />
+      {/* Three dots icon */}
+      <BsThreeDots
+        className="text-white cursor-pointer absolute right-4 top-1/2 -translate-y-1/2"
+        onClick={toggleDropdown}
+      />
 
+      {showDropdown && (
+        <div
+          className="dropdown absolute right-4 top-full bg-gray-800 p-2 rounded shadow-md border border-gray-600"
+          style={{ width: "165px", maxHeight: "300px", overflowY: "auto" }}
+        >
+          <button
+            onClick={() => {
+              setShowDropdown(false);
+            }}
+            className="dropdown-item hover:bg-gray-700 text-white py-2 px-4 w-full rounded transition duration-300"
+          >
+            Move On
+          </button>
+          <div className="dropdown-divider border-t border-gray-600 my-2"></div>
+
+          <button
+            onClick={() => {
+              setShowDropdown(false);
+            }}
+            className="dropdown-item hover:bg-gray-700 text-white py-2 px-4 w-full rounded transition duration-300 "
+          >
+            Copy Issue Link
+          </button>
+
+          <button
+            onClick={() => {
+              setShowDropdown(false);
+            }}
+            className="dropdown-item hover:bg-gray-700 text-white py-2 px-4 w-full rounded transition duration-300 "
+          >
+            Copy Issue Key
+          </button>
+          <div className="dropdown-divider border-t border-gray-600 my-2"></div>
+
+          <button
+            onClick={() => {
+              setShowDropdown(false);
+            }}
+            className="dropdown-item hover:bg-gray-700 text-white  px-4 w-full rounded transition duration-300 "
+          >
+            Add Flag
+          </button>
+
+          <button
+            onClick={() => {
+              setShowDropdown(false);
+            }}
+            className="dropdown-item hover:bg-gray-700 text-white py-2 px-4 w-full rounded transition duration-300 "
+          >
+            Add Label
+          </button>
+
+          <button
+            onClick={() => {
+              // Add the functionality for "Add Parent"
+              setShowDropdown(false);
+            }}
+            className="dropdown-item hover:bg-gray-700 text-white py-2 px-4 w-full rounded transition duration-300 "
+          >
+            Add Parent
+          </button>
+          <div className="dropdown-divider border-t border-gray-600 my-2"></div>
+        </div>
+      )}
+
+      {/* Task content */}
       <p className="my-auto h-[90%] w-full overflow-y-auto overflow-x-hidden whitespace-pre-wrap">
         {task.content}
       </p>
 
+      {/* Delete button */}
       {mouseIsOver && (
         <button
           onClick={() => {
             deleteTask(task.id);
           }}
-          className="stroke-white absolute right-10 top-1/2 -translate-y-1/2 bg-#030712 p-2 rounded opacity-60 hover:opacity-100"
+          className="stroke-white absolute right-10 top-1/2 -translate-y-1/2 bg-gray-700 p-2 rounded opacity-60 hover:opacity-100"
         >
           <TrashIcon />
         </button>

@@ -5,8 +5,8 @@
 html,
 body,
 #root {
-  background-color: #26282b; /* Use the actual color code for bg-gray-900 */
-  box-sizing: border-box; /* Use box-sizing instead of box-border */
+  background-color: #26282b;  
+  box-sizing: border-box; 
 }
 
 ::-webkit-scrollbar {
@@ -18,22 +18,21 @@ body,
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #b91c1c; /* Use the actual color code for bg-rose-900 */
-  border-radius: 0.75rem; /* Use border-radius instead of rounded-xl */
+  background-color: #b91c1c; 
+  border-radius: 0.75rem;  
 }
 
 .task > ::-webkit-scrollbar-thumb {
-  background-color: #1d4ed8; /* Use the actual color code for bg-sky-500 */
-  border-radius: 0.75rem; /* Use border-radius instead of rounded-xl */
+  background-color: #1d4ed8;  
+  border-radius: 0.75rem;  
 }
 
 .left-arrow,
 .right-arrow {
-  margin-bottom: 45.5rem; /* You can adjust the margin value as needed */
+  margin-bottom: 45rem; 
 }
-/* Add this to your existing CSS */
-.input-field {
-  width: 70%; /* Set the width as needed */
+ .input-field {
+  width: 70%;  
 }
 .mr-60 {
   margin-right: 18rem;

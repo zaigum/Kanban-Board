@@ -1,6 +1,6 @@
 // Navbar.tsx
 import React, { useState } from "react";
-import { FaBan, FaChartLine, FaCog, FaSearch, FaUser, FaTag } from 'react-icons/fa';
+import { FaBan, FaChartLine, FaCog, FaSearch, FaUser, } from 'react-icons/fa';
 
 function Navbar() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -21,8 +21,8 @@ function Navbar() {
   };
 
   return (
-    <nav className="p-4 mt-20 border-b border-gray-300">
-      <h1 className="text-white text-2xl font-bold">SoundDrop</h1>
+    <nav className="p-4 mt-20 ">
+      <h1 className="text-white text-2xl ml-6 font-bold">SoundDrop</h1>
 
       <div className="container mx-auto flex justify-between items-center mt-10">
         <div className="flex items-center">
@@ -43,11 +43,24 @@ function Navbar() {
           </div>
           <button className="ml-2 text-white flex items-center">
             <FaUser />
-            <span className="ml-1">User</span>
+            <span className="ml-1"></span>
           </button>
           <div className="ml-2 flex items-center">
-            <FaTag className="text-white" />
-            <select
+             <select
+              value={selectedLabel || ""}
+              onChange={handleLabelChange}
+              className="ml-1 bg-gray-700 text-white px-2 py-1 rounded-md"
+            >
+              <option value="" disabled>
+                Website
+              </option>
+              <option value="label1">Label 1</option>
+              <option value="label2">Label 2</option>
+              <option value="label3">Label 3</option>
+            </select>
+          </div>
+          <div className="ml-2 flex items-center">
+             <select
               value={selectedLabel || ""}
               onChange={handleLabelChange}
               className="ml-1 bg-gray-700 text-white px-2 py-1 rounded-md"
@@ -61,8 +74,7 @@ function Navbar() {
             </select>
           </div>
           <div className="ml-2 flex items-center">
-            <FaTag className="text-white" />
-            <select
+             <select
               value={selectedType || ""}
               onChange={handleTypeChange}
               className="ml-1 bg-gray-700 text-white px-2 py-1 rounded-md"
