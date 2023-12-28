@@ -40,3 +40,10 @@ body,
 .mt-60{
   margin-top: 20rem;
 }
+/* Add this to your CSS file or as an inline style in your component */
+.quill-editor {
+  height: 200px; /* Set the desired height */
+  color: white;
+  background-color: #1e293b;
+  border: 1px solid #1e293b;
+}

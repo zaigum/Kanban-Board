@@ -137,7 +137,7 @@ function TaskCard({ task, deleteTask, updateTask }: Props) {
             onClick={() => {
               setShowDropdown(false);
             }}
-            className="dropdown-item hover:bg-gray-700 text-white  px-4 w-full rounded transition duration-300 "
+            className="dropdown-item hover:bg-gray-700 text-white py-1  px-4 w-full rounded transition duration-300 "
           >
             Add Flag
           </button>
@@ -146,7 +146,7 @@ function TaskCard({ task, deleteTask, updateTask }: Props) {
             onClick={() => {
               setShowDropdown(false);
             }}
-            className="dropdown-item hover:bg-gray-700 text-white py-2 px-4 w-full rounded transition duration-300 "
+            className="dropdown-item hover:bg-gray-700 text-white py-1 px-4 w-full rounded transition duration-300 "
           >
             Add Label
           </button>
@@ -156,7 +156,7 @@ function TaskCard({ task, deleteTask, updateTask }: Props) {
               // Add the functionality for "Add Parent"
               setShowDropdown(false);
             }}
-            className="dropdown-item hover:bg-gray-700 text-white py-2 px-4 w-full rounded transition duration-300 "
+            className="dropdown-item hover:bg-gray-700 text-white py-1 px-4 w-full rounded transition duration-300 "
           >
             Add Parent
           </button>
@@ -164,13 +164,11 @@ function TaskCard({ task, deleteTask, updateTask }: Props) {
         </div>
       )}
 
-      {/* Task content */}
-      <p className="my-auto h-[90%] w-full overflow-y-auto overflow-x-hidden whitespace-pre-wrap">
+       <p className="my-auto h-[90%] w-full overflow-y-auto overflow-x-hidden whitespace-pre-wrap">
         {task.content}
       </p>
 
-      {/* Delete button */}
-      {mouseIsOver && (
+       {mouseIsOver && (
         <button
           onClick={() => {
             deleteTask(task.id);
