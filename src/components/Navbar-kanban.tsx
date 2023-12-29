@@ -21,7 +21,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="p-4 mt-20 ">
+    <nav className="p-4 mt-20 my-custom-navbar">
       <h1 className="text-white text-2xl ml-6 font-bold">SoundDrop</h1>
 
       <div className="container mx-auto flex justify-between items-center mt-10">

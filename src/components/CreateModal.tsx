@@ -106,8 +106,7 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
                       }}
                       placeholder="Enter your description here..."
                       style={{ width: '570px', color: "white", backgroundColor: "#1e293b" }}
-                      // Add the custom style for the toolbar container
-                      formats={[
+                       formats={[
                         'header', 'font', 'size',
                         'bold', 'italic', 'underline', 'strike', 'blockquote',
                         'list', 'bullet', 'indent',
@@ -120,8 +119,9 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
                       name={key}
                       onChange={(e) => handleChange(key, e.target.files?.[0])}
                       className="border p-2 rounded w-full focus:outline-none focus:border-blue-500"
-                      style={{ backgroundColor: "#1e293b" }}
+                      style={{ backgroundColor: "#1e293b ", width:"36rem" }}
                       placeholder={`Choose ${key.toLowerCase()}...`}
+                      
                     />
                   ) : key === "flagged" || key === "createAnotherIssue" ? (
                     <div className="flex items-center">

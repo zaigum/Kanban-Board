@@ -1,5 +1,5 @@
 import React, { useState } from "react";
- 
+
 const SignUp: React.FC<{ onToggleLogin: () => void }> = ({ onToggleLogin }) => {
   const [userData, setUserData] = useState({
     UserName: "",
@@ -8,36 +8,11 @@ const SignUp: React.FC<{ onToggleLogin: () => void }> = ({ onToggleLogin }) => {
     Address: "",
     Password: "",
   });
-  
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUserData((prevData) => ({ ...prevData, [name]: value }));
   };
-  
-  const handleSignUp = async () => {
-    try {
-      const response = await fetch("https://repulsive-mite-hosiery.cyclic.app/api/auth/createUser", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      });
-  
-      const result = await response.json();
-  
-      if (result.isValid) {
-        console.log("User signed up successfully");
-      } else {
-        console.error("Error during sign up:", result.message);
-      }
-    } catch (error) {
-      console.error("Error during sign up:", error);
-    }
-  };
-  
-  
 
   
   return (
@@ -114,8 +89,7 @@ const SignUp: React.FC<{ onToggleLogin: () => void }> = ({ onToggleLogin }) => {
           </div>
           <button
             type="button"
-            onClick={handleSignUp}
-            className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600 w-full"
+             className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600 w-full"
           >
             Sign Up
           </button>
