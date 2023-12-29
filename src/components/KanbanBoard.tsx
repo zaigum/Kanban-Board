@@ -167,7 +167,7 @@ function KanbanBoard() {
 
   return (
     <div className="m-auto min-h-screen w-full  text-white bg-slate-700 items-center overflow-x-auto overflow-y-hidden px-[40px]">
-    <Navbar /> {/* Include the Navbar component here */}
+    {/* <Navbar /> Include the Navbar component here */}
     <DndContext
       sensors={sensors}
       onDragStart={onDragStart}

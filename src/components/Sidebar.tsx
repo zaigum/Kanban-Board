@@ -27,12 +27,11 @@ const Sidebar: React.FC = () => {
 
       {/* Sidebar */}
       <aside
-        className={`bg-slate-800 text-white p-6 w-64 transition-all duration-300 ${
+        className={`bg-slate-800 mt-16 text-white p-6 w-64 transition-all duration-300 ${
           isSidebarOpen ? "block" : "hidden"
         }`}
       >
-         <h2 className="text-xl font-bold mb-4">Sidebar</h2>
-
+ 
          <div className="mb-6">
         <h2 className="text-2xl font-bold mb-4">Sidebar</h2>
 
@@ -104,7 +103,7 @@ const Sidebar: React.FC = () => {
       {/* Toggle Button */}
    
 <button
-  className="text-white p-2 bg-slate-800"
+  className="text-white p-2 bg-slate-800 mt-30"
   onClick={toggleSidebar}
 >
   {isSidebarOpen ? (
