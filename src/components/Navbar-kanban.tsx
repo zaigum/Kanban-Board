@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { FaBan, FaChartLine, FaCog, FaSearch, FaUser } from 'react-icons/fa';
 import Select from "react-select";
+
 const labelOptions = [
   { value: "failed", label: "Failed" },
   { value: "high", label: "High" },
@@ -24,13 +25,12 @@ const websiteOptions = [
 const customStyles = {
   control: (base: any, state: any) => ({
     ...base,
-
     backgroundColor: "#XXXXXX",
     border: state.isFocused ? "2px solid #XXXXXX" : "2px solid #2D3748",
     boxShadow: state.isFocused ? "0 0 0 2px #4A5568" : "none",
     color: "#fff",
     borderRadius: "8px",
-     transition: "border-color 0.2s, box-shadow 0.2s",
+    transition: "border-color 0.2s, box-shadow 0.2s",
   }),
   option: (provided: any, state: any) => ({
     ...provided,
@@ -38,10 +38,9 @@ const customStyles = {
     padding: "10px",
     color: "#fff",
     '&:hover': {
-      backgroundColor: "#4A5568", // Change the color for hover effect
+      backgroundColor: "#4A5568",
     },
   }),
-  
   singleValue: (provided: any) => ({
     ...provided,
     color: "#fff",
@@ -58,7 +57,6 @@ const customStyles = {
     display: "none",
   }),
 };
-
 function Navbar() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedType, setSelectedType] = useState<any>(null);
@@ -66,7 +64,6 @@ function Navbar() {
   const [selectedWebsite, setSelectedWebsite] = useState<any>(null);
 
   const handleSearch = () => {
-    // Implement your search logic here
     console.log("Search query:", searchQuery);
   };
 
@@ -74,23 +71,26 @@ function Navbar() {
     <nav className="p-4 mt-20">
       <h1 className="text-white text-2xl font-bold">SoundDrop</h1>
 
-      <div className="container mx-auto flex justify-between items-center mt-10" >
+      <div className="container mx-auto flex justify-between items-center mt-10">
         <div className="flex items-center space-x-4">
-          <div className="flex items-center">
+          <div className="relative flex items-center">
             <input
               type="text"
               placeholder="Search..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="bg-transparent text-white outline-none border-b border-white px-3 py-2"
+              className="bg-transparent text-white outline-none border border-gray-400 rounded px-3 py-2 pr-10 focus:outline-none focus:border-gray-500 transition-all duration-300"
             />
             <button
               onClick={handleSearch}
-              className="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600"
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none"
             >
               <FaSearch />
             </button>
           </div>
+          <button className="text-white flex items-center bg-gray-900 rounded-full px-2 py-2">
+            <FaUser />
+           </button>
           <div className="flex items-center">
             <Select
               value={selectedLabel}
@@ -132,10 +132,7 @@ function Navbar() {
             <FaCog />
             <span className="ml-1">View Settings</span>
           </button>
-          <button className="text-white flex items-center">
-            <FaUser />
-            <span className="ml-1"></span>
-          </button>
+          
         </div>
       </div>
     </nav>

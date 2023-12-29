@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { IoClose } from "react-icons/io5";
-import { FaUsers } from "react-icons/fa";
-
+import { FaUsers } from "react-icons/fa"; // Import FaInfoCircle
+import { BiDotsHorizontalRounded } from "react-icons/bi"; // Import BiDotsHorizontalRounded
 interface CreateModalProps {
   onClose: () => void;
 }
@@ -66,8 +66,17 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
         </div>
 
         <form onSubmit={handleSubmit} className="h-[45rem] overflow-y-auto">
-        <p className="text-xs text-gray-400 mt-1">
-            Required fields are marked with an asterisk</p>
+          <p className="text-xs text-gray-400 mt-1 flex justify-between">
+            Required fields are marked with an asterisk{" "}
+            <button
+              type="button"
+              className="flex items-center bg-gray-800 p-1 rounded ml-64"
+            >
+              <span className="text-gray-300 text-sm">Import Issues</span>
+            </button>
+            <BiDotsHorizontalRounded className="text-white mr-5 mt-2" />
+          </p>
+
           {/* Project */}
           <div className="mb-4">
             <label htmlFor="project" className="block text-white">
@@ -125,6 +134,9 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
               <option value="resolved">Resolved</option>
               {/* Add more status options as needed */}
             </select>
+            <p className="text-xs text-gray-400 mt-1">
+              This is the issue inifail upon craetion
+            </p>
           </div>
 
           {/* Summary */}
@@ -487,7 +499,7 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
             </p>
           </div>
         </form>
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center mt-5">
           {/* Create Another Issue Checkbox */}
           <div className="mb-4 flex items-center">
             <input
