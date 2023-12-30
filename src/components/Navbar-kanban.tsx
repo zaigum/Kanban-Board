@@ -56,8 +56,7 @@ const customStyles = {
   indicatorSeparator: () => ({
     display: "none",
   }),
-};
-function Navbar() {
+};function Navbar() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedType, setSelectedType] = useState<any>(null);
   const [selectedLabel, setSelectedLabel] = useState<any>(null);
@@ -73,7 +72,7 @@ function Navbar() {
 
       <div className="container mx-auto flex justify-between items-center mt-10">
         <div className="flex items-center space-x-4">
-          <div className="relative flex items-center">
+          <div className="flex items-center"> {/* Removed 'relative' class */}
             <input
               type="text"
               placeholder="Search..."
@@ -83,14 +82,14 @@ function Navbar() {
             />
             <button
               onClick={handleSearch}
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none"
+              className="text-gray-400 hover:text-gray-600 focus:outline-none ml-2"
             >
               <FaSearch />
             </button>
           </div>
           <button className="text-white flex items-center bg-gray-900 rounded-full px-2 py-2">
             <FaUser />
-           </button>
+          </button>
           <div className="flex items-center">
             <Select
               value={selectedLabel}
@@ -132,7 +131,6 @@ function Navbar() {
             <FaCog />
             <span className="ml-1">View Settings</span>
           </button>
-          
         </div>
       </div>
     </nav>

@@ -2,9 +2,11 @@
 import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { IoClose } from "react-icons/io5";
 import { FaUsers } from "react-icons/fa"; // Import FaInfoCircle
 import { BiDotsHorizontalRounded } from "react-icons/bi"; // Import BiDotsHorizontalRounded
+import { IoAttachOutline } from "react-icons/io5"; // Import the desired attachment icon
+import { IoMdClose as IoClose, IoMdSearch as IoSearch } from "react-icons/io";
+
 interface CreateModalProps {
   onClose: () => void;
 }
@@ -27,13 +29,13 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
     labels: "",
     fixVersion: "",
     reporter: "",
-    attachment: "",
     linkedIssues: "",
     flagged: false,
     pricePage: false,
     taxCode: false,
     priceOverride: false,
-    createAnother: false, // Initialize createAnother
+    createAnother: false,
+    attachment: null as File | null,
   });
 
   const handleChange = (
@@ -51,26 +53,52 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
     console.log("Form submitted with data:", formData);
     onClose();
   };
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files && e.target.files[0];
+
+    // After
+    setFormData((prevData) => ({
+      ...prevData,
+      // other properties remain unchanged
+      attachment: file || null, // Ensure that the type is compatible
+    }));
+  };
+
+  const onZoomIn = () => {
+    // Your zoom in logic here
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex text-white items-center justify-center bg-black bg-opacity-50">
       <div className="bg-gray-900 w-full max-w-2xl p-6 rounded-lg max-h-[100vh] overflow-y-auto mx-auto">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold">Create Issue</h2>
-          <button
-            onClick={onClose}
-            className="text-gray-500 hover:text-gray-700 focus:outline-none"
-          >
-            <IoClose className="h-6 w-6" />
-          </button>
+          <div className="flex items-center">
+            <button
+              onClick={onZoomIn}
+              className="text-gray-500 hover:text-gray-700 focus:outline-none ml-4"
+            >
+              <IoSearch className="h-6 w-6" />
+            </button>
+            <button
+              onClick={onClose}
+              className="text-gray-500 hover:text-gray-700 focus:outline-none ml-4"
+            >
+              <IoClose className="h-6 w-6" />
+            </button>
+          </div>
         </div>
+        <hr className="mt-4 border-gray-600" />
 
-        <form onSubmit={handleSubmit} className="h-[45rem] overflow-y-auto">
+        <form
+          onSubmit={handleSubmit}
+          className="h-[45rem] overflow-y-auto mt-3"
+        >
           <p className="text-xs text-gray-400 mt-1 flex justify-between">
-            Required fields are marked with an asterisk{" "}
+            Required fields are marked with an asterisk *{" "}
             <button
               type="button"
-              className="flex items-center bg-gray-800 p-1 rounded ml-64"
+              className="flex items-center bg-gray-700 p-1 rounded ml-64"
             >
               <span className="text-gray-300 text-sm">Import Issues</span>
             </button>
@@ -80,16 +108,16 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
           {/* Project */}
           <div className="mb-4">
             <label htmlFor="project" className="block text-white">
-              Project
+              Project *
             </label>
             <select
               id="project"
               name="project"
               value={formData.project}
               onChange={handleChange}
-              className="border p-2 w-80 bg-slate-800	 text-white rounded focus:outline-none focus:border-blue-500"
+              className=" border border-gray-700 p-2 w-80 bg-slate-800	 text-white rounded focus:outline-none focus:border-blue-500"
             >
-              <option value="">Select Project</option>
+              <option value=""></option>
               <option value="project1">Project 1</option>
               <option value="project2">Project 2</option>
               {/* Add more project options as needed */}
@@ -99,25 +127,34 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
           {/* Issue Type */}
           <div className="mb-4">
             <label htmlFor="project" className="block text-white">
-              Issue Type
+              <span>Issue Type*</span>
             </label>
             <select
               id="issueType"
               name="issueType"
               value={formData.issueType}
               onChange={handleChange}
-              className="border p-2 w-80 bg-slate-800	 rounded focus:outline-none focus:border-blue-500"
+              className="border border-gray-700 p-2 w-80 bg-slate-800	 rounded focus:outline-none focus:border-blue-500"
             >
-              <option value="">Select Issue Type</option>
+              <option value=""></option>
               <option value="bug">Bug</option>
               <option value="feature">Feature</option>
               {/* Add more issue type options as needed */}
             </select>
+            
           </div>
-          <hr className="mt-4 border-gray-600" />
+          <a
+              href="/learn-issue-types"
+              target="_blank" // Opens the link in a new tab
+              rel="noopener noreferrer" // Security best practice when using target="_blank"
+              className=" text-blue-500" // Add a style to indicate it's a link
+            >
+              Learn about issue types
+            </a>
+          <hr className="mt-10 border-gray-600" />
 
           {/* Status */}
-          <div className="mb-4">
+          <div className="mb-4 mt-8">
             <label htmlFor="project" className="block text-white">
               Status
             </label>
@@ -126,9 +163,9 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
               name="status"
               value={formData.status}
               onChange={handleChange}
-              className="border p-2 w-60 bg-slate-800	 text-white rounded focus:outline-none focus:border-blue-500"
+              className=" p-2 w-60 bg-slate-800	 text-white rounded focus:outline-none focus:border-blue-500"
             >
-              <option value="">Select Status</option>
+              <option value=""></option>
               <option value="open">Open</option>
               <option value="inProgress">In Progress</option>
               <option value="resolved">Resolved</option>
@@ -150,13 +187,13 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
               name="summary"
               value={formData.summary}
               onChange={handleChange}
-              className="border p-2 w-full bg-slate-800 rounded focus:outline-none focus:border-blue-500"
+              className="border border-gray-700 p-2 w-full bg-slate-800 rounded focus:outline-none focus:border-blue-500"
             />
           </div>
 
           <div className="mb-4">
             <label className="block text-white">PriceBook Pages</label>
-            <div className="flex space-x-4">
+            <div className="flex flex-col space-y-4 p-4">
               {/* Price Page */}
               <div className="flex items-center">
                 <input
@@ -173,7 +210,7 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
                   className="mr-2"
                 />
                 <label htmlFor="pricePage" className="text-gray-200">
-                  Price Page
+                  04.01-Price Page
                 </label>
               </div>
 
@@ -193,7 +230,7 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
                   className="mr-2"
                 />
                 <label htmlFor="taxCode" className="text-gray-200">
-                  Tax Code
+                  04.02-Tax Code,Vat Rate
                 </label>
               </div>
 
@@ -213,7 +250,7 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
                   className="mr-2"
                 />
                 <label htmlFor="priceOverride" className="text-gray-200">
-                  Price Override
+                 04.03- Price Override
                 </label>
               </div>
             </div>
@@ -222,16 +259,16 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
           {/* Priority */}
           <div className="mb-4">
             <label htmlFor="priority" className="block text-gray-200">
-              Priority
+              Priority*
             </label>
             <select
               id="priority"
               name="priority"
               value={formData.priority}
               onChange={handleChange}
-              className="border p-2 w-80 bg-slate-800	 text-white rounded focus:outline-none focus:border-blue-500"
+              className="border border-gray-700 p-2 w-80 bg-slate-800	 text-white rounded focus:outline-none focus:border-blue-500"
             >
-              <option value="">Select Priority</option>
+              <option value=""></option>
               <option value="high">High</option>
               <option value="medium">Medium</option>
               <option value="low">Low</option>
@@ -248,9 +285,9 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
               name="getComponent"
               value={formData.getComponent}
               onChange={handleChange}
-              className="border p-2 w-80 bg-slate-800 text-white rounded focus:outline-none focus:border-blue-500"
+              className="border border-gray-700 p-2 w-80 bg-slate-800 text-white rounded focus:outline-none focus:border-blue-500"
             >
-              <option value="">Select Get Component</option>
+              <option value=""></option>
               <option value="component1">Component 1</option>
               <option value="component2">Component 2</option>
               {/* Add more options as needed */}
@@ -267,9 +304,9 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
               name="error"
               value={formData.error}
               onChange={handleChange}
-              className="border p-2 w-80 bg-slate-800 text-white rounded focus:outline-none focus:border-blue-500"
+              className="border border-gray-700 p-2 w-80 bg-slate-800 text-white rounded focus:outline-none focus:border-blue-500"
             >
-              <option value="">Select Error</option>
+              <option value=""></option>
               <option value="error1">Error 1</option>
               <option value="error2">Error 2</option>
               {/* Add more options as needed */}
@@ -286,9 +323,9 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
               name="testedBy"
               value={formData.testedBy}
               onChange={handleChange}
-              className="border p-2 w-80 bg-slate-800 text-white rounded focus:outline-none focus:border-blue-500"
+              className="border border-gray-700 p-2 w-80 bg-slate-800 text-white rounded focus:outline-none focus:border-blue-500"
             >
-              <option value="">Select Tester</option>
+              <option value=""></option>
               <option value="tester1">Tester 1</option>
               <option value="tester2">Tester 2</option>
               {/* Add more options as needed */}
@@ -306,9 +343,9 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
               name="retestStatus"
               value={formData.retestStatus}
               onChange={handleChange}
-              className="border p-2 w-80 bg-slate-800 text-white rounded focus:outline-none focus:border-blue-500"
+              className="border border-gray-700 p-2 w-80 bg-slate-800 text-white rounded focus:outline-none focus:border-blue-500"
             >
-              <option value="">Select Retest Status</option>
+              <option value=""></option>
               <option value="retest1">Retest 1</option>
               <option value="retest2">Retest 2</option>
               {/* Add more options as needed */}
@@ -326,7 +363,7 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
               onChange={(value) =>
                 setFormData((prevData) => ({ ...prevData, description: value }))
               }
-              className=" mr-10 p-2 w-full rounded focus:outline-none focus:border-blue-500"
+              className="  mr-10 p-2 w-full rounded focus:outline-none focus:border-blue-500"
               modules={{
                 toolbar: [
                   [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -364,7 +401,7 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
                 name="team"
                 value={formData.team}
                 onChange={handleChange}
-                className="pl-10 border p-2 w-80 bg-slate-800 text-white rounded focus:outline-none focus:border-blue-500"
+                className="border border-gray-700 pl-10  p-2 w-80 bg-slate-800 text-white rounded focus:outline-none focus:border-blue-500"
               />
             </div>
             <p className="text-xs text-gray-400 mt-1">
@@ -384,7 +421,7 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
               name="assignee"
               value={formData.assignee}
               onChange={handleChange}
-              className="border p-2 w-80 bg-slate-800	 text-white rounded focus:outline-none focus:border-blue-500"
+              className="border border-gray-700 p-2 w-80 bg-slate-800	 text-white rounded focus:outline-none focus:border-blue-500"
             />
           </div>
 
@@ -398,9 +435,9 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
               name="labels"
               value={formData.labels}
               onChange={handleChange}
-              className="border p-2 w-80 bg-slate-800 text-white rounded focus:outline-none focus:border-blue-500"
+              className="border border-gray-700 p-2 w-80 bg-slate-800 text-white rounded focus:outline-none focus:border-blue-500"
             >
-              <option value="option1">Option 1</option>
+              <option value=""></option>
               <option value="option2">Option 2</option>
               <option value="option3">Option 3</option>
               {/* Add more options as needed */}
@@ -417,9 +454,9 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
               name="fixVersion"
               value={formData.fixVersion}
               onChange={handleChange}
-              className="border p-2 w-80 bg-slate-800 text-white rounded focus:outline-none focus:border-blue-500"
+              className="border border-gray-700 p-2 w-80 bg-slate-800 text-white rounded focus:outline-none focus:border-blue-500"
             >
-              <option value="version1">Version 1</option>
+              <option value=""></option>
               <option value="version2">Version 2</option>
               <option value="version3">Version 3</option>
               {/* Add more versions as needed */}
@@ -437,23 +474,34 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
               name="reporter"
               value={formData.reporter}
               onChange={handleChange}
-              className="border p-2 w-80 bg-slate-800	 text-white rounded focus:outline-none focus:border-blue-500"
+              className="border border-gray-700 p-2 w-80 bg-slate-800	 text-white rounded focus:outline-none focus:border-blue-500"
             />
           </div>
 
           {/* Attachment */}
           <div className="mb-4">
-            <label htmlFor="attachment" className="block text-gray-200">
+            <label htmlFor="attachment" className="block text-gray-200 mb-2">
               Attachment
             </label>
-            <input
-              type="text"
-              id="attachment"
-              name="attachment"
-              value={formData.attachment}
-              onChange={handleChange}
-              className="border p-2 w-80 bg-slate-800	 text-white rounded focus:outline-none focus:border-blue-500"
-            />
+            <div className="flex items-center">
+              <input
+                type="file"
+                id="attachment"
+                name="attachment"
+                onChange={handleFileChange}
+                className="hidden" // Hide the default file input
+              />
+              <label
+                htmlFor="attachment"
+                className="cursor-pointer  border border-gray-700 p-2 flex-grow border-dashed
+
+                text-white rounded focus:outline-none focus:border-blue-500 hover:bg-gray-700"
+              >
+                <div className="ml-60">
+                  <IoAttachOutline className="inline-block " /> Drop a file
+                </div>
+              </label>
+            </div>
           </div>
 
           {/* Linked Issues Dropdown */}
@@ -466,9 +514,9 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
               name="linkedIssues"
               value={formData.linkedIssues}
               onChange={handleChange}
-              className="border p-2 w-80 bg-slate-800 text-white rounded focus:outline-none focus:border-blue-500"
+              className="border border-gray-700 p-2 w-80 bg-slate-800 text-white rounded focus:outline-none focus:border-blue-500"
             >
-              <option value="issue1">Issue 1</option>
+              <option value=""></option>
               <option value="issue2">Issue 2</option>
               <option value="issue3">Issue 3</option>
             </select>
@@ -490,7 +538,7 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
                     flagged: !prevData.flagged,
                   }))
                 }
-                className="border p-2 rounded focus:outline-none focus:border-blue-500"
+                className=" p-2 rounded focus:outline-none focus:border-blue-500"
               />
               <span className="ml-2 text-gray-200">Impediment</span>
             </div>

@@ -13,13 +13,14 @@ const Navbar: React.FC = () => {
       const isScrolled = scrollPosition > 0;
       setIsNavbarVisible(!isScrolled);
     };
-
+  
     window.addEventListener("scroll", handleScroll);
-
+  
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+  
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -30,7 +31,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-<nav className={`bg-slate-800 p-3 text-slate-200 flex items-center justify-between fixed top-0 w-full transition-all duration-300 ${isNavbarVisible ? "opacity-100" : "opacity-0 -translate-y-full"}`}>
+<nav className={`bg-slate-800 p-3 text-slate-200 flex items-center justify-between fixed top-0 w-full transition-all duration-300 ${isNavbarVisible ? "" : "opacity-100"}`}>
       {/* Left side with heading and navigation links */}
       <div className="flex items-center space-x-4">
         {/* Heading */}

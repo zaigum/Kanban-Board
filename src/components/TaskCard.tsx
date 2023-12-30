@@ -101,7 +101,7 @@ function TaskCard({ task, deleteTask, updateTask }: Props) {
 
       {showDropdown && (
         <div
-          className="dropdown absolute right-4 top-full bg-gray-800 p-2 rounded shadow-md border border-gray-600"
+          className="dropdown  right-4 top-full bg-gray-800 p-2 rounded shadow-md border border-gray-600"
           style={{ width: "165px", maxHeight: "300px", overflowY: "auto" }}
         >
           <button
