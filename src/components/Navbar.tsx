@@ -13,14 +13,13 @@ const Navbar: React.FC = () => {
       const isScrolled = scrollPosition > 0;
       setIsNavbarVisible(!isScrolled);
     };
-  
+
     window.addEventListener("scroll", handleScroll);
-  
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -31,7 +30,11 @@ const Navbar: React.FC = () => {
   };
 
   return (
-<nav className={`bg-slate-800 p-3 text-slate-200 flex items-center justify-between fixed top-0 w-full transition-all duration-300 ${isNavbarVisible ? "" : "opacity-100"}`}>
+    <nav
+      className={`bg-slate-800 p-3 text-slate-200 flex items-center justify-between fixed top-0 w-full transition-all duration-300 ${
+        isNavbarVisible ? "" : "opacity-100"
+      } border-b-2 border-gray-600`}
+    >
       {/* Left side with heading and navigation links */}
       <div className="flex items-center space-x-4">
         {/* Heading */}
@@ -68,14 +71,16 @@ const Navbar: React.FC = () => {
         </div>
 
         {/* Create button */}
-        <button onClick={openModal} className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
+        <button
+          onClick={openModal}
+          className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+        >
           Create
         </button>
       </div>
 
       {/* Right side with icons, Create button, and Search Input */}
       <div className="flex items-center space-x-4">
-        
         {/* Search Input with transition effect */}
         <div className="transition-all duration-300">
           <input

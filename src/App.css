@@ -29,7 +29,7 @@ body,
 
 .left-arrow,
 .right-arrow {
-  margin-bottom: 45rem; 
+  margin-bottom: 265rem; 
 }
  .input-field {
   width: 70%;  
@@ -73,5 +73,6 @@ body,
  .ql-editor::before {
   color: white !important;  
 }
- 
-  
+.mt-17{
+  margin-top: 4.3rem;
+}

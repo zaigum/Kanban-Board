@@ -1,140 +1,118 @@
 // Navbar.tsx
-import { useState } from "react";
-import { FaBan, FaChartLine, FaCog, FaSearch, FaUser } from 'react-icons/fa';
-import Select from "react-select";
+import React, { useState } from "react";
+import { FaCog, FaChartBar, FaEllipsisV, FaSearch } from "react-icons/fa"; // Import icons from react-icons/fa
+import { BsStarFill } from "react-icons/bs"; // Import star icon from react-icons/bs
 
-const labelOptions = [
-  { value: "failed", label: "Failed" },
-  { value: "high", label: "High" },
-  { value: "low", label: "Low" },
-  { value: "medium", label: "Medium" },
-];
-
-const typeOptions = [
-  { value: "type1", label: "Type 1" },
-  { value: "type2", label: "Type 2" },
-  { value: "type3", label: "Type 3" },
-];
-
-const websiteOptions = [
-  { value: "website1", label: "Website 1" },
-  { value: "website2", label: "Website 2" },
-  { value: "website3", label: "Website 3" },
-];
-
-const customStyles = {
-  control: (base: any, state: any) => ({
-    ...base,
-    backgroundColor: "#XXXXXX",
-    border: state.isFocused ? "2px solid #XXXXXX" : "2px solid #2D3748",
-    boxShadow: state.isFocused ? "0 0 0 2px #4A5568" : "none",
-    color: "#fff",
-    borderRadius: "8px",
-    transition: "border-color 0.2s, box-shadow 0.2s",
-  }),
-  option: (provided: any, state: any) => ({
-    ...provided,
-    backgroundColor: state.isSelected ? "#1A202C" : "#2D3748",
-    padding: "10px",
-    color: "#fff",
-    '&:hover': {
-      backgroundColor: "#4A5568",
-    },
-  }),
-  singleValue: (provided: any) => ({
-    ...provided,
-    color: "#fff",
-  }),
-  placeholder: (provided: any) => ({
-    ...provided,
-    color: "#A0AEC0",
-  }),
-  indicatorsContainer: (provided: any) => ({
-    ...provided,
-    color: "#A0AEC0",
-  }),
-  indicatorSeparator: () => ({
-    display: "none",
-  }),
-};function Navbar() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedType, setSelectedType] = useState<any>(null);
-  const [selectedLabel, setSelectedLabel] = useState<any>(null);
-  const [selectedWebsite, setSelectedWebsite] = useState<any>(null);
-
-  const handleSearch = () => {
-    console.log("Search query:", searchQuery);
-  };
+const Navbar: React.FC = () => {
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [selectedWebsite, setSelectedWebsite] = useState<string>("");
+  const [selectedType, setSelectedType] = useState<string>("");
+  const [selectedLabel, setSelectedLabel] = useState<string>("");
 
   return (
-    <nav className="p-4 mt-20">
-      <h1 className="text-white text-2xl font-bold">SoundDrop</h1>
+    <div className="mt-20">
+      <p className="ml-4 text-slate-500"> Project / SD-01</p>
+      <h1 className="text-2xl mt-5 font-bold ml-4 flex items-center">
+        SoundDrop
+        <div className="ml-auto flex items-center space-x-2 mr-5">
+          <BsStarFill className="text-yellow-500" />
+          <FaEllipsisV />
+          <FaSearch />
+        </div>
+      </h1>
 
-      <div className="container mx-auto flex justify-between items-center mt-10">
-        <div className="flex items-center space-x-4">
-          <div className="flex items-center"> {/* Removed 'relative' class */}
-            <input
-              type="text"
-              placeholder="Search..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="bg-transparent text-white outline-none border border-gray-400 rounded px-3 py-2 pr-10 focus:outline-none focus:border-gray-500 transition-all duration-300"
-            />
-            <button
-              onClick={handleSearch}
-              className="text-gray-400 hover:text-gray-600 focus:outline-none ml-2"
-            >
-              <FaSearch />
-            </button>
-          </div>
-          <button className="text-white flex items-center bg-gray-900 rounded-full px-2 py-2">
-            <FaUser />
-          </button>
-          <div className="flex items-center">
-            <Select
-              value={selectedLabel}
-              onChange={(selectedOption) => setSelectedLabel(selectedOption)}
-              options={labelOptions}
-              placeholder="Label"
-              styles={customStyles}
-            />
-          </div>
-          <div className="flex items-center">
-            <Select
-              value={selectedType}
-              onChange={(selectedOption) => setSelectedType(selectedOption)}
-              options={typeOptions}
-              placeholder="Type"
-              styles={customStyles}
-            />
-          </div>
-          <div className="flex items-center">
-            <Select
+      <header className="p-4 mt-5 flex justify-between items-center">
+        {/* Left side content with heading */}
+        <div className="flex items-center space-x-4 text-black">
+          {/* Search Bar */}
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="p-2 border border-gray-600 rounded-md w-40 bg-slate-800 focus:outline-none"
+          />
+
+          {/* Website Dropdown */}
+          <div className="hidden md:block ">
+            <select
               value={selectedWebsite}
-              onChange={(selectedOption) => setSelectedWebsite(selectedOption)}
-              options={websiteOptions}
-              placeholder="Website"
-              styles={customStyles}
-            />
+              onChange={(e) => setSelectedWebsite(e.target.value)}
+              className="p-2 border border-slate-800 rounded-md w-32 focus:outline-none bg-slate-800 text-white" // Add bg-slate-800 and text-white classes
+              style={{
+                borderRadius: "3.375rem",
+                padding: "0.5rem",
+                color: "white",
+              }} // Custom styles for options
+            >
+              <option value="">Website</option>
+              <option value="website1">
+                Website: Home Page : Add Testimonials{" "}
+              </option>
+            </select>
+          </div>
+
+          {/* Types Dropdown */}
+          <div className="hidden md:block">
+            <select
+              value={selectedType}
+              onChange={(e) => setSelectedType(e.target.value)}
+              className="p-2 border border-slate-800 rounded-md focus:outline-none bg-slate-800 text-white" // Add bg-slate-800 and text-white classes
+              style={{
+                borderRadius: "0.375rem",
+                padding: "0.5rem",
+                color: "white",
+              }} // Custom styles for options
+            >
+              <option value="">Types</option>
+              <option value="type1">Type 1</option>
+              <option value="type2">Type 2</option>
+            </select>
+          </div>
+
+          {/* Label Dropdown */}
+          <div className="hidden md:block">
+            <select
+              value={selectedLabel}
+              onChange={(e) => setSelectedLabel(e.target.value)}
+              className="p-2 border border-slate-800 rounded-md focus:outline-none bg-slate-800 text-white" // Add bg-slate-800 and text-white classes
+              style={{
+                borderRadius: "0.375rem",
+                padding: "0.5rem",
+                color: "white",
+              }} // Custom styles for options
+            >
+              <option value="">Label</option>
+              <option value="failed">Failed</option>
+              <option value="high">High</option>
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+            </select>
           </div>
         </div>
-        <div className="flex items-center space-x-4">
-          <button className="text-white flex items-center bg-gray-900 rounded-md px-4 py-2">
-            <FaBan />
-            <span className="ml-1">None</span>
+
+        {/* Buttons on the right side */}
+        <div className="flex items-center space-x-4 text-white">
+          <div className="mr-1 text-gray-400">GROUP BY</div>
+          <button className="flex items-center space-x-2 px-3 py-2 rounded-md border bg-slate-700 border-gray-600">
+            None
           </button>
-          <button className="text-white flex items-center bg-gray-900 rounded-md px-4 py-2">
-            <FaChartLine />
-            <span className="ml-1">Insights</span>
+          <button className="flex items-center space-x-2 px-3 py-2 rounded-md border bg-slate-700 border-gray-600">
+            <div className="mr-2">
+              <FaChartBar />
+            </div>
+            Insights
           </button>
-          <button className="text-white flex items-center bg-gray-900 rounded-md px-4 py-2">
-            <FaCog />
-            <span className="ml-1">View Settings</span>
+          <button className="flex items-center space-x-2 px-3 py-2 rounded-md border bg-slate-700 border-gray-600">
+            <div className="mr-2">
+              <FaCog />
+            </div>
+            View Settings
           </button>
         </div>
-      </div>
-    </nav>
+      </header>
+    </div>
   );
-}
+};
 
 export default Navbar;

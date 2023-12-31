@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../App.css";
 
- import {
+import {
   FiCalendar,
   FiList,
   FiClipboard,
@@ -11,9 +11,9 @@ import "../App.css";
   FiBook,
   FiBookOpen,
   FiSettings,
-   FiChevronLeft,
-  FiChevronRight,} from "react-icons/fi"; // Import icons from react-icons
-
+  FiChevronLeft,
+  FiChevronRight,
+} from "react-icons/fi"; // Import icons from react-icons
 const Sidebar: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
 
@@ -22,18 +22,14 @@ const Sidebar: React.FC = () => {
   };
 
   return (
-    <div className={`flex ${isSidebarOpen ? "" : "overflow-hidden"}`}>
-     
-
-      {/* Sidebar */}
+    <div className="flex">
       <aside
-        className={`bg-slate-800 mt-16 text-white p-6 w-64 transition-all duration-300 ${
+        className={`bg-slate-800 mt-16 text-white p-6 w-64  border-r-2 border-gray-600  transition-all duration-300 ml-9 ${
           isSidebarOpen ? "block" : "hidden"
         }`}
       >
- 
-         <div className="mb-6">
-        <h2 className="text-2xl font-bold mb-4">Sidebar</h2>
+        <div className="mb-6">
+          <h2 className="text-2xl font-bold mb-4">Sidebar</h2>
 
           <h3 className="text-lg font-semibold mb-2 mt-4">Planning</h3>
           <ul>
@@ -51,7 +47,6 @@ const Sidebar: React.FC = () => {
             </li>
           </ul>
           <hr className="mt-4 border-gray-600" />
-
         </div>
 
         {/* Development Section */}
@@ -72,14 +67,16 @@ const Sidebar: React.FC = () => {
             </li>
           </ul>
           <hr className="mt-4 border-gray-600" />
-
         </div>
 
         {/* Project Management Section */}
         <div>
-          <h3 className="text-lg font-semibold mb-2 mt-6">Project Management</h3>
+          <h3 className="text-lg font-semibold mb-2 mt-6">
+            Project Management
+          </h3>
           <ul>
             <li>
+              {" "}
               <FiBook className="inline-block mr-2 " />
               <a href="#project-pages">Project Pages</a>
             </li>
@@ -97,25 +94,25 @@ const Sidebar: React.FC = () => {
             </li>
           </ul>
           <hr className="mt-4 border-gray-600" />
-
         </div>
       </aside>
       {/* Toggle Button */}
-   
-<button
-  className="text-white p-2 bg-slate-800 mt-30"
-  onClick={toggleSidebar}
->
-  {isSidebarOpen ? (
-    <FiChevronLeft size={20} className="bg-slate-700 rounded-full left-arrow" />
-  ) : (
-    <FiChevronRight size={20} className="bg-slate-700 rounded-full right-arrow" />
-  )}
-</button>
-
-
-
-
+      <button
+        className="text-white p-2 bg-slate-800 mt-17 border-r-2 border-gray-600 fixed top-0 "
+        onClick={toggleSidebar}
+      >
+        {isSidebarOpen ? (
+          <FiChevronLeft
+            size={20}
+            className="bg-slate-700 rounded-full left-arrow"
+          />
+        ) : (
+          <FiChevronRight
+            size={20}
+            className="bg-slate-700 rounded-full right-arrow"
+          />
+        )}{" "}
+      </button>{" "}
     </div>
   );
 };

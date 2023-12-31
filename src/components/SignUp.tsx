@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const SignUp: React.FC<{ onToggleLogin: () => void }> = ({ onToggleLogin }) => {
   const [userData, setUserData] = useState({
@@ -14,9 +15,28 @@ const SignUp: React.FC<{ onToggleLogin: () => void }> = ({ onToggleLogin }) => {
     setUserData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  
+  const handleSignUp = async () => {
+    try {
+      const response = await axios.post(
+        "https://repulsive-mite-hosiery.cyclic.app/api/auth/createUser",
+        userData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      // Handle success, you might want to redirect or show a success message
+      console.log("Sign up successful:", response.data);
+    } catch (error) {
+      // Handle error, you might want to show an error message
+      console.error("Sign up error:", error);
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-slate-900	 flex items-center justify-center">
+    <div className="min-h-screen bg-slate-900 flex items-center justify-center">
       <div className="bg-white p-8 rounded shadow-md max-w-md w-full">
         <h2 className="text-3xl font-semibold text-center mb-6 text-gray-800">
           Sign Up
@@ -89,16 +109,17 @@ const SignUp: React.FC<{ onToggleLogin: () => void }> = ({ onToggleLogin }) => {
           </div>
           <button
             type="button"
-             className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600 w-full"
+            className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600 w-full"
+            onClick={handleSignUp}
           >
             Sign Up
           </button>
           <p className="mt-4 text-center text-gray-600">
-          Already have an account?{' '}
-          <button className="text-blue-500" onClick={onToggleLogin}>
-            Login
-          </button>
-        </p>
+            Already have an account?{" "}
+            <button className="text-blue-500" onClick={onToggleLogin}>
+              Login
+            </button>
+          </p>
         </form>
       </div>
     </div>

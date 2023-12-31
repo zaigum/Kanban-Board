@@ -49,8 +49,7 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    // Add your form submission logic here
-    console.log("Form submitted with data:", formData);
+     console.log("Form submitted with data:", formData);
     onClose();
   };
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,14 +58,12 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
     // After
     setFormData((prevData) => ({
       ...prevData,
-      // other properties remain unchanged
-      attachment: file || null, // Ensure that the type is compatible
+       attachment: file || null,  
     }));
   };
 
   const onZoomIn = () => {
-    // Your zoom in logic here
-  };
+   };
 
   return (
     <div className="fixed inset-0 z-50 flex text-white items-center justify-center bg-black bg-opacity-50">
@@ -120,12 +117,10 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
               <option value=""></option>
               <option value="project1">Project 1</option>
               <option value="project2">Project 2</option>
-              {/* Add more project options as needed */}
-            </select>
+             </select>
           </div>
 
-          {/* Issue Type */}
-          <div className="mb-4">
+           <div className="mb-4">
             <label htmlFor="project" className="block text-white">
               <span>Issue Type*</span>
             </label>
@@ -139,22 +134,20 @@ const CreateModal: React.FC<CreateModalProps> = ({ onClose }) => {
               <option value=""></option>
               <option value="bug">Bug</option>
               <option value="feature">Feature</option>
-              {/* Add more issue type options as needed */}
-            </select>
+             </select>
             
           </div>
           <a
               href="/learn-issue-types"
-              target="_blank" // Opens the link in a new tab
-              rel="noopener noreferrer" // Security best practice when using target="_blank"
-              className=" text-blue-500" // Add a style to indicate it's a link
+              target="_blank"  
+              rel="noopener noreferrer"  
+              className=" text-blue-500"  
             >
               Learn about issue types
             </a>
           <hr className="mt-10 border-gray-600" />
 
-          {/* Status */}
-          <div className="mb-4 mt-8">
+           <div className="mb-4 mt-8">
             <label htmlFor="project" className="block text-white">
               Status
             </label>

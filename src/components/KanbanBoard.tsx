@@ -1,4 +1,3 @@
-
 import PlusIcon from "../icons/PlusIcon";
 import { useMemo, useState } from "react";
 import { Column, Id, Task } from "../types";
@@ -21,22 +20,22 @@ import { createPortal } from "react-dom";
 import TaskCard from "./TaskCard";
 
 const defaultCols: Column[] = [
-    {
-      id: "TL REVIEW",
-     title: "TL REVIEW",
-    },
-    {
-      id: "doing",
-     title: "PRE BACKLOG 5",
-    },
-    {
-     id: "done",
-      title: "PRODUCT BACKLOG ITEMS 25",
-   },
-    {
-     id: "IN PROGRESS",
-      title: "IN PROGRESS",
-   },
+  {
+    id: "TL REVIEW",
+    title: "TL REVIEW",
+  },
+  {
+    id: "doing",
+    title: "PRE BACKLOG 5",
+  },
+  {
+    id: "done",
+    title: "PRODUCT BACKLOG ITEMS 25",
+  },
+  {
+    id: "IN PROGRESS",
+    title: "IN PROGRESS",
+  },
 ];
 
 const defaultTasks: Task[] = [
@@ -61,11 +60,11 @@ const defaultTasks: Task[] = [
   //    columnId: "doing",
   //    content: "Analyze competitors",
   //  },
-    // {
-    //   id: "5",
-    //   columnId: "done",
-    //   content: "Create UI kit documentation",
-    // },
+  // {
+  //   id: "5",
+  //   columnId: "done",
+  //   content: "Create UI kit documentation",
+  // },
   // {
   //   id: "6",
   //   columnId: "done",
@@ -132,10 +131,6 @@ function KanbanBoard() {
     })
   );
 
-
-
- 
-
   useEffect(() => {
     const storedColumns = localStorage.getItem("kanbanColumns");
     const storedTasks = localStorage.getItem("kanbanTasks");
@@ -147,56 +142,50 @@ function KanbanBoard() {
       if (storedColumns) {
         setColumns(JSON.parse(storedColumns));
       } else {
-         setColumns(defaultCols);
+        setColumns(defaultCols);
       }
 
       if (storedTasks) {
         setTasks(JSON.parse(storedTasks));
       } else {
-         setTasks(defaultTasks);
+        setTasks(defaultTasks);
       }
     } catch (error) {
       console.error("Error loading data from localStorage:", error);
     }
   }, []);
-  
-
-
-
-
 
   return (
-    <div className="m-auto min-h-screen w-full  text-white bg-slate-700 items-center overflow-x-auto overflow-y-hidden px-[40px]">
-    <Navbar />  
-    <DndContext
-      sensors={sensors}
-      onDragStart={onDragStart}
-      onDragEnd={onDragEnd}
-      onDragOver={onDragOver}
-      
-    >
-      <div className="m-auto flex gap-4 mt-24">
-        <div className="flex gap-4">
-          <SortableContext items={columnsId}>
-            {columns.map((col) => (
-              <ColumnContainer
-                key={col.id}
-                column={col}
-                deleteColumn={deleteColumn}
-                updateColumn={updateColumn}
-                createTask={createTask}
-                deleteTask={deleteTask}
-                updateTask={updateTask}
-                tasks={tasks.filter((task) => task.columnId === col.id)}
-              />
-            ))}
-          </SortableContext>
-        </div>
-        <button
-          onClick={() => {
-            createNewColumn();
-          }}
-          className="
+    <div className="m-auto min-h-screen w-full  text-white bg-slate-800 items-center overflow-x-auto overflow-y-hidden px-[40px]">
+      <Navbar />
+      <DndContext
+        sensors={sensors}
+        onDragStart={onDragStart}
+        onDragEnd={onDragEnd}
+        onDragOver={onDragOver}
+      >
+        <div className="m-auto flex gap-4 mt-24">
+          <div className="flex gap-4">
+            <SortableContext items={columnsId}>
+              {columns.map((col) => (
+                <ColumnContainer
+                  key={col.id}
+                  column={col}
+                  deleteColumn={deleteColumn}
+                  updateColumn={updateColumn}
+                  createTask={createTask}
+                  deleteTask={deleteTask}
+                  updateTask={updateTask}
+                  tasks={tasks.filter((task) => task.columnId === col.id)}
+                />
+              ))}
+            </SortableContext>
+          </div>
+          <button
+            onClick={() => {
+              createNewColumn();
+            }}
+            className="
     h-[60px]
     w-[350px]
     min-w-[350px]
@@ -211,43 +200,40 @@ function KanbanBoard() {
     flex
     gap-2
     "
-        >
-          <PlusIcon />
-          Add Column
-        </button>
-      </div>
+          >
+            <PlusIcon />
+            Add Column
+          </button>
+        </div>
 
-      {createPortal(
-        <DragOverlay>
-          {activeColumn && (
-            <ColumnContainer
-              column={activeColumn}
-              deleteColumn={deleteColumn}
-              updateColumn={updateColumn}
-              createTask={createTask}
-              deleteTask={deleteTask}
-              updateTask={updateTask}
-              tasks={tasks.filter(
-                (task) => task.columnId === activeColumn.id
-              )}
-            />
-          )}
-          {activeTask && (
-            <TaskCard
-              task={activeTask}
-              deleteTask={deleteTask}
-              updateTask={updateTask}
-            />
-          )}
-        </DragOverlay>,
-        document.body
-      )}
-    </DndContext>
-  </div>
-);
-
-
-
+        {createPortal(
+          <DragOverlay>
+            {activeColumn && (
+              <ColumnContainer
+                column={activeColumn}
+                deleteColumn={deleteColumn}
+                updateColumn={updateColumn}
+                createTask={createTask}
+                deleteTask={deleteTask}
+                updateTask={updateTask}
+                tasks={tasks.filter(
+                  (task) => task.columnId === activeColumn.id
+                )}
+              />
+            )}
+            {activeTask && (
+              <TaskCard
+                task={activeTask}
+                deleteTask={deleteTask}
+                updateTask={updateTask}
+              />
+            )}
+          </DragOverlay>,
+          document.body
+        )}
+      </DndContext>
+    </div>
+  );
 
   function createTask(columnId: Id) {
     setTasks((prevTasks) => {
@@ -256,38 +242,27 @@ function KanbanBoard() {
         {
           id: generateId(),
           columnId,
-          content: `Task ${prevTasks.length + 1}`, // Change from 0 to 1
+          content: `Task ${prevTasks.length + 1}`,
         },
       ];
-  
+
       localStorage.setItem("kanbanTasks", JSON.stringify(newTasks));
       return newTasks;
     });
   }
-  
+
   function createNewColumn() {
     setColumns((prevColumns) => {
       const columnToAdd: Column = {
         id: generateId(),
-        title: `Column ${prevColumns.length + 1}`, // Change from 0 to 1
+        title: `Column ${prevColumns.length + 1}`,
       };
-  
+
       const newColumns = [...prevColumns, columnToAdd];
       localStorage.setItem("kanbanColumns", JSON.stringify(newColumns));
       return newColumns;
     });
   }
-  
-  
-
-
-
-
-
-
-
-
-
 
   function deleteTask(id: Id) {
     setTasks((prevTasks) => {
@@ -297,21 +272,17 @@ function KanbanBoard() {
     });
   }
 
-
   function updateTask(id: Id, content: string) {
     setTasks((prevTasks) => {
       const newTasks = prevTasks.map((task) => {
         if (task.id !== id) return task;
         return { ...task, content };
       });
-  
+
       localStorage.setItem("kanbanTasks", JSON.stringify(newTasks));
       return newTasks;
     });
   }
-  
-
-
 
   function deleteColumn(id: Id) {
     setColumns((prevColumns) => {
@@ -326,32 +297,17 @@ function KanbanBoard() {
     });
   }
 
-
-
-
-
-
-
-
-  
-
   function updateColumn(id: Id, title: string) {
     setColumns((prevColumns) => {
       const newColumns = prevColumns.map((col) => {
         if (col.id !== id) return col;
         return { ...col, title };
       });
-  
+
       localStorage.setItem("kanbanColumns", JSON.stringify(newColumns));
       return newColumns;
     });
   }
-  
-
-
-
-
-
 
   function onDragStart(event: DragStartEvent) {
     if (event.active.data.current?.type === "Column") {
@@ -365,47 +321,30 @@ function KanbanBoard() {
     }
   }
 
-
-
-
-
-
-
   function onDragEnd(event: DragEndEvent) {
     setActiveColumn(null);
     setActiveTask(null);
-  
+
     const { active, over } = event;
     if (!over) return;
-  
+
     const activeId = active.id;
     const overId = over.id;
-  
+
     if (activeId === overId) return;
-  
+
     const isActiveAColumn = active.data.current?.type === "Column";
     if (!isActiveAColumn) return;
-  
+
     setColumns((columns) => {
       const activeColumnIndex = columns.findIndex((col) => col.id === activeId);
       const overColumnIndex = columns.findIndex((col) => col.id === overId);
-  
+
       const newColumns = arrayMove(columns, activeColumnIndex, overColumnIndex);
       localStorage.setItem("kanbanColumns", JSON.stringify(newColumns));
       return newColumns;
     });
   }
-  
-
-
-
-
-
-
-  
-
-
-
 
   function onDragOver(event: DragOverEvent) {
     const { active, over } = event;
@@ -421,24 +360,23 @@ function KanbanBoard() {
 
     if (!isActiveATask) return;
 
-     if (isActiveATask && isOverATask) {
+    if (isActiveATask && isOverATask) {
       setTasks((tasks) => {
         const activeIndex = tasks.findIndex((t) => t.id === activeId);
         const overIndex = tasks.findIndex((t) => t.id === overId);
 
         if (tasks[activeIndex].columnId != tasks[overIndex].columnId) {
-           tasks[activeIndex].columnId = tasks[overIndex].columnId;
+          tasks[activeIndex].columnId = tasks[overIndex].columnId;
           return arrayMove(tasks, activeIndex, overIndex - 1);
         }
 
         return arrayMove(tasks, activeIndex, overIndex);
       });
     }
-    
-    
+
     const isOverAColumn = over.data.current?.type === "Column";
 
-     if (isActiveATask && isOverAColumn) {
+    if (isActiveATask && isOverAColumn) {
       setTasks((tasks) => {
         const activeIndex = tasks.findIndex((t) => t.id === activeId);
 
@@ -451,7 +389,7 @@ function KanbanBoard() {
 }
 
 function generateId() {
-   return Math.floor(Math.random() * 10001);
+  return Math.floor(Math.random() * 10001);
 }
 
 export default KanbanBoard;
