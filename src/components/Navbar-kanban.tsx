@@ -116,7 +116,7 @@ const Navbar: React.FC = () => {
         </div>
 
         {/* Buttons on the right side */}
-        <div className="flex items-center space-x-4 text-white">
+        <div className="flex items-center space-x-3 text-white">
           <div className="mr-1 text-gray-400">GROUP BY</div>
           <button className="flex items-center space-x-2 px-3 py-2 rounded-md border bg-slate-700 border-gray-600">
             None

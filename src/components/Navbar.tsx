@@ -36,41 +36,94 @@ const Navbar: React.FC = () => {
       } border-b-2 border-gray-600`}
     >
       {/* Left side with heading and navigation links */}
-      <div className="flex items-center space-x-7">
+      <div className="flex items-center space-x-2">
         {/* Heading */}
         <div className="text-2xl font-bold">Jira Software</div>
 
-        {/* Navigation Links */}
-        <a href="#work" className="cursor-pointer">
-          Work
-        </a>
-        <a href="#projects" className="cursor-pointer">
-          Projects
-        </a>
-        <a href="#filters" className="cursor-pointer">
-          Filters
-        </a>
-        <a href="#dashboard" className="cursor-pointer">
-          Dashboard
-        </a>
-        <a href="#teams" className="cursor-pointer">
-          Teams
-        </a>
+        <div className="hidden md:block">
+          <select
+            className="p-2 border cursor-pointer border-slate-800 rounded-md focus:outline-none bg-slate-800 text-white" // Add bg-slate-800 and text-white classes
+            style={{
+              borderRadius: "0.375rem",
+              padding: "0.5rem",
+              color: "white",
+            }} // Custom styles for options
+          >
+            <option value=""> Work</option>
+            <option value="type1">Type 1</option>
+            <option value="type2">Type 2</option>
+          </select>
+        </div>
 
-        {/* Dropdown for "Apps" with options */}
-        {/* Dropdown for "Apps" with options */}
-        <div className="relative group">
-          <a href="#apps" className="cursor-pointer">
-            Apps
-          </a>
-          <div className="absolute hidden bg-white text-black p-2 space-y-2 group-hover:block">
-            {/* Dropdown content for "Apps" */}
-            <a href="#option1">Option 1</a>
-            <a href="#option2">Option 2</a>
-            <a href="#option3">Option 3</a>
-            <a href="#option4">Option 4</a>
-            {/* Add more options as needed */}
-          </div>
+        <div className="hidden md:block">
+          <select
+            className="p-2 border cursor-pointer border-slate-800 rounded-md focus:outline-none bg-slate-800 text-white" // Add bg-slate-800 and text-white classes
+            style={{
+               padding: "0.5rem",
+              color: "white",
+            }} // Custom styles for options
+          >
+            <option value="">Projects</option>
+            <option value="type1">Type 1</option>
+            <option value="type2">Type 2</option>
+          </select>
+        </div>
+
+        <div className="hidden md:block">
+          <select
+            className="p-2 border cursor-pointer border-slate-800 rounded-md focus:outline-none bg-slate-800 text-white" // Add bg-slate-800 and text-white classes
+            style={{
+              borderRadius: "0.375rem",
+              padding: "0.5rem",
+              color: "white",
+            }} // Custom styles for options
+          >
+            <option value=""> Filters</option>
+            <option value="type1">Type 1</option>
+            <option value="type2">Type 2</option>
+          </select>
+        </div>
+        <div className="hidden md:block">
+          <select
+            className="p-2 border cursor-pointer border-slate-800 rounded-md focus:outline-none bg-slate-800 text-white" // Add bg-slate-800 and text-white classes
+            style={{
+              borderRadius: "0.375rem",
+              padding: "0.5rem",
+              color: "white",
+            }} // Custom styles for options
+          >
+            <option value=""> Dashboard</option>
+            <option value="type1">Type 1</option>
+            <option value="type2">Type 2</option>
+          </select>
+        </div>
+        <div className="hidden md:block">
+          <select
+            className="p-2 border cursor-pointer border-slate-800 rounded-md focus:outline-none bg-slate-800 text-white" // Add bg-slate-800 and text-white classes
+            style={{
+              borderRadius: "0.375rem",
+              padding: "0.5rem",
+              color: "white",
+            }} // Custom styles for options
+          >
+            <option value="">Teams</option>
+            <option value="type1">Type 1</option>
+            <option value="type2">Type 2</option>
+          </select>
+        </div>
+        <div className="hidden md:block">
+          <select
+            className="p-2 border cursor-pointer border-slate-800 rounded-md focus:outline-none bg-slate-800 text-white" // Add bg-slate-800 and text-white classes
+            style={{
+              borderRadius: "0.375rem",
+              padding: "0.5rem",
+              color: "white",
+            }} // Custom styles for options
+          >
+            <option value="">Apps</option>
+            <option value="type1">Type 1</option>
+            <option value="type2">Type 2</option>
+          </select>
         </div>
 
         {/* Create button */}
