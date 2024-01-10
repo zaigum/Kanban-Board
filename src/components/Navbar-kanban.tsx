@@ -38,17 +38,15 @@ const Navbar: React.FC = () => {
         {/* Left side content with heading */}
         <div className="flex items-center space-x-4 text-black">
           {/* Search Bar */}
-          <div className="relative">
+          <div className="">
             <input
               type="text"
-              placeholder="Search..."
+              placeholder="Search"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="p-2 pl-8 border border-gray-600 rounded-md w-40 bg-slate-800 focus:outline-none"
+              className="p-2 pl-8 border border-gray-600 rounded-md w-28 bg-slate-800 focus:outline-none"
             />
-            <div className="absolute inset-y-0 left-0 pl-2 flex items-center">
-              <FaSearch className="text-gray-400" />
-            </div>
+            
           </div>
 
           {/* Invite People Button */}

@@ -36,7 +36,7 @@ const Navbar: React.FC = () => {
       } border-b-2 border-gray-600`}
     >
       {/* Left side with heading and navigation links */}
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center space-x-7">
         {/* Heading */}
         <div className="text-2xl font-bold">Jira Software</div>
 
@@ -58,6 +58,7 @@ const Navbar: React.FC = () => {
         </a>
 
         {/* Dropdown for "Apps" with options */}
+        {/* Dropdown for "Apps" with options */}
         <div className="relative group">
           <a href="#apps" className="cursor-pointer">
             Apps
@@ -66,6 +67,8 @@ const Navbar: React.FC = () => {
             {/* Dropdown content for "Apps" */}
             <a href="#option1">Option 1</a>
             <a href="#option2">Option 2</a>
+            <a href="#option3">Option 3</a>
+            <a href="#option4">Option 4</a>
             {/* Add more options as needed */}
           </div>
         </div>
