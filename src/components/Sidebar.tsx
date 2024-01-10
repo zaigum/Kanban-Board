@@ -24,7 +24,7 @@ const Sidebar: React.FC = () => {
   return (
     <div className="flex">
       <aside
-        className={`bg-slate-800 mt-16 text-white p-6 w-64  border-r-2 border-gray-600  transition-all duration-300 ml-9 ${
+        className={`bg-slate-800 mt-16 text-white p-6 w-64    transition-all duration-300  ${
           isSidebarOpen ? "block" : "hidden"
         }`}
       >
@@ -98,7 +98,7 @@ const Sidebar: React.FC = () => {
       </aside>
       {/* Toggle Button */}
       <button
-        className="text-white p-2 bg-slate-800 mt-17 border-r-2 border-gray-600 fixed top-0 "
+        className="text-white p-2 bg-slate-800 mt-17 border-r-2 border-gray-600  top-0 "
         onClick={toggleSidebar}
       >
         {isSidebarOpen ? (

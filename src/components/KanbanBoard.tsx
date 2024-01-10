@@ -156,7 +156,7 @@ function KanbanBoard() {
   }, []);
 
   return (
-    <div className="m-auto min-h-screen w-full  text-white bg-slate-800 items-center overflow-x-auto overflow-y-hidden px-[40px]">
+    <div className="m-auto min-h-screen w-full mt-0 text-white bg-slate-800 items-center overflow-x-auto overflow-y-hidden px-[40px]">
       <Navbar />
       <DndContext
         sensors={sensors}

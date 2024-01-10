@@ -15,25 +15,25 @@ const SignUp: React.FC<{ onToggleLogin: () => void }> = ({ onToggleLogin }) => {
     setUserData((prevData) => ({ ...prevData, [name]: value }));
   };
 
+
+
+
   const handleSignUp = async () => {
     try {
-      const response = await axios.post(
-        "https://repulsive-mite-hosiery.cyclic.app/api/auth/createUser",
-        userData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await axios.post("http://localhost:5173/api/auth/createUser", userData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      
 
-      // Handle success, you might want to redirect or show a success message
-      console.log("Sign up successful:", response.data);
+        console.log("Sign up successful:", response.data);
     } catch (error) {
-      // Handle error, you might want to show an error message
-      console.error("Sign up error:", error);
+       console.error("Sign up error:", error);
     }
   };
+
+
 
   return (
     <div className="min-h-screen bg-slate-900 flex items-center justify-center">
@@ -44,11 +44,11 @@ const SignUp: React.FC<{ onToggleLogin: () => void }> = ({ onToggleLogin }) => {
         <form>
           <div className="mb-4">
             <label className="block text-gray-600 text-sm font-semibold mb-2">
-              UserName:
+              Username:
             </label>
             <input
               type="text"
-              name="UserName"
+              name="Username"
               placeholder="Enter your username"
               value={userData.UserName}
               onChange={handleChange}
@@ -70,7 +70,7 @@ const SignUp: React.FC<{ onToggleLogin: () => void }> = ({ onToggleLogin }) => {
           </div>
           <div className="mb-4">
             <label className="block text-gray-600 text-sm font-semibold mb-2">
-              PhoneNumber:
+              Phone number:
             </label>
             <input
               type="text"

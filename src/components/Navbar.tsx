@@ -1,6 +1,6 @@
 // Navbar.tsx
 import React, { useState, useEffect } from "react";
-import { FiBell, FiSettings, FiUser } from "react-icons/fi";
+import { FiBell, FiSettings, FiUser, FiSearch } from "react-icons/fi"; // Import FiSearch
 import CreateModal from "./CreateModal"; // Import the modal component
 
 const Navbar: React.FC = () => {
@@ -82,11 +82,12 @@ const Navbar: React.FC = () => {
       {/* Right side with icons, Create button, and Search Input */}
       <div className="flex items-center space-x-4">
         {/* Search Input with transition effect */}
-        <div className="transition-all duration-300">
+        <div className="transition-all duration-300 relative">
+          <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
           <input
             type="text"
             placeholder="Search"
-            className="border border-gray-300 p-2 rounded focus:outline-none focus:border-blue-500"
+            className="p-2 pl-8 border border-gray-600 rounded-md w-60 bg-slate-800 focus:outline-none"
           />
         </div>
         {/* Notification Icon */}
