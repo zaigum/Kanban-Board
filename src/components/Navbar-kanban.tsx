@@ -17,10 +17,10 @@ const Navbar: React.FC = () => {
 
   return (
     <div className="mt-20">
-      <a href="/project/sd-01" className="ml-4 text-slate-500">
+      <a href="/project/sd-01" className=" text-slate-500">
         Project / SD-01
       </a>{" "}
-      <h1 className="text-2xl mt-5 font-bold ml-4 flex items-center">
+      <h1 className="text-2xl mt-5 font-bold  flex items-center">
         SoundDrop
         <div className="ml-auto flex items-center space-x-2 mr-5">
           <BsStarFill className="text-yellow-500" />
@@ -34,7 +34,7 @@ const Navbar: React.FC = () => {
           <FaSearch />
         </div>
       </h1>
-      <header className="p-4 mt-5 flex justify-between items-center">
+      <header className=" mt-5 flex justify-between items-center">
         {/* Left side content with heading */}
         <div className="flex items-center space-x-4 text-black">
           {/* Search Bar */}
