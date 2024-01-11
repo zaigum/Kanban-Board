@@ -44,7 +44,7 @@ const Navbar: React.FC = () => {
               placeholder="Search"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="p-2 pl-8 border border-gray-600 rounded-md w-28 bg-slate-800 focus:outline-none"
+              className="p-2 pl-8 border h-12 border-gray-600 rounded-md w-36 bg-slate-800 focus:outline-none"
             />
             
           </div>
